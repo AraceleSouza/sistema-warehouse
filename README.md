@@ -1,24 +1,10 @@
-# README
+# Sistema Warehouse :computer:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+:heavy_check_mark: Representa uma aplicação dentro do contexto de um e-commerce. 
 
-Things you may want to cover:
+:heavy_check_mark: Esta aplicação é responsável pela gestão de galpões e do estoque de cada galpão.
 
-* Ruby version
+:heavy_check_mark: Os galpões estão espalhados por vários endereços no país e são responsáveis por receber produtos novos comprados pela empresa, manter os dados de estoque atualizados, registrar a saída de produtos. 
 
-* System dependencies
+:heavy_check_mark: Os produtos são comprados de fornecedores e a entrada dos produtos está sempre vinculada a um pedido. Todas estas informações também serão cadastradas nesse sistema.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
