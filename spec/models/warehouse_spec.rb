@@ -84,18 +84,45 @@ RSpec.describe Warehouse, type: :model do
     end 
 
     it 'false when code is already in use' do
-        # Arrange
-        first_warehouse = Warehouse.create(name:'Rio', code: 'RIO', address: 'Endereço',
+      # Arrange
+      first_warehouse = Warehouse.create(name:'Rio', code: 'RIO', address: 'Endereço',
                                         cep: '25000-000', city: 'Rio', area: 1000, 
                                         description: 'Alguma descrição')
 
-        second_warehouse = Warehouse.new(name:'Niteroi', code: 'RIO', address: 'Avenida',
+      second_warehouse = Warehouse.new(name:'Niteroi', code: 'RIO', address: 'Avenida',
                                         cep: '35000-000', city: 'Niteroi', area: 1500, 
                                         description: 'Outra descrição')                                        
-        # Act
-        result = second_warehouse.valid?
-        # Assert
-        expect(result).to eq false
+      # Act
+      result = second_warehouse.valid?
+      # Assert
+      expect(result).to eq false
+    end
+
+    it 'false when name is already in use' do
+      # Arrange
+      first_warehouse = Warehouse.create(name:'Rio', code: 'RIO', address: 'Endereço',
+                                      cep: '25000-000', city: 'Rio', area: 1000, 
+                                      description: 'Alguma descrição')
+
+      second_warehouse = Warehouse.new(name:'Rio', code: 'NTI', address: 'Avenida',
+                                      cep: '35000-000', city: 'Niteroi', area: 1500, 
+                                      description: 'Outra descrição')                                        
+      # Act
+      result = second_warehouse.valid?
+      # Assert
+      expect(result).to eq false
+  end
+
+
+    it 'false when zip code is invalid' do
+      # Arrange
+      warehouse = Warehouse.new(name:'Rio', code: 'RIO', address: 'Endereço',
+                                cep: '2500', city: 'Rio', area: 1000, 
+                                description: 'Alguma descrição')
+      # Act
+      result = warehouse.valid?
+      # Assert
+      expect(result).to eq false
     end
   end
 end

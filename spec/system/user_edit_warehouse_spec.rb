@@ -41,7 +41,7 @@ describe 'Usuário edita um galpão' do
     expect(page).to have_content 'Nome: Galpão Internacional'
     expect(page).to have_content 'Endereço: Anenida dos Galpões, 500'
     expect(page).to have_content 'Área: 200000 m2'
-    expect(page).to have_content 'CEP: 16000-000'
+    
   end
 
   it 'e mantém os campos obrigatórios' do 
