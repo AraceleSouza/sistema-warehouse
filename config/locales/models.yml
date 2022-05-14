@@ -15,7 +15,7 @@ pt-BR:
       supplier:
         corporate_name: 'Razão Social'
         brand_name: 'Nome Fantasia'
-        registration_name: 'CNPJ'
+        registration_number: 'CNPJ'
         full_address: 'Endereço'
         city: 'Cidade'
         state: 'Estado'

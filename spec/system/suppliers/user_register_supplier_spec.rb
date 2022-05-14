@@ -28,7 +28,7 @@ describe 'User registers a supplier' do
     click_on 'Cadastrar novo fornecedor'
     fill_in 'Nome Fantasia', with: 'TECH VISION'
     fill_in 'Razão Social', with: 'World Technology Vision LTDA'
-    fill_in 'CNPJ', with: '3447216000102'
+    fill_in 'CNPJ', with: '43447216000102'
     fill_in 'Endereço', with: 'Av das Flores, 500'
     fill_in 'Cidade', with: 'Cajamar'
     fill_in 'Estado', with: 'SP'
@@ -38,7 +38,7 @@ describe 'User registers a supplier' do
     
     expect(page).to have_content('Fornecedor cadastrado com sucesso')
     expect(page).to have_content('World Technology Vision LTDA')
-    expect(page).to have_content('CNPJ: 3447216000102')
+    expect(page).to have_content('CNPJ: 43447216000102')
     expect(page).to have_content('Endereço: Av das Flores, 500')
     expect(page).to have_content('E-mail: tech_vision@gmail.com')
     
@@ -66,4 +66,5 @@ describe 'User registers a supplier' do
     expect(page).to have_content 'Estado não pode ficar em branco'
     expect(page).to have_content 'E-mail não pode ficar em branco'
   end
+
 end

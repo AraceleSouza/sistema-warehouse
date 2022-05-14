@@ -45,7 +45,7 @@ RSpec.describe Supplier, type: :model do
 
       it 'false when city is empty' do
           # Arrange
-          supplier = Supplier.new(corporate_name: 'World Technology Vision LTDA', brand_name: 'TECH VISION', registration_number: '43447216000102', 
+          supplier = Supplier.new(corporate_name: 'World Technology Vision LTDA', brand_name: 'TECH VISION', registration_number: '3447216000102', 
                       full_address: 'Av das Flores, 500', city: '', state:'SP', email: 'tech_vision@gmail.com')
           # Act
           result = supplier.valid?
@@ -89,15 +89,5 @@ RSpec.describe Supplier, type: :model do
       expect(result).to eq false
     end
 
-    it 'false when registration_number is invalid' do
-      # Arrange
-      supplier = Supplier.new(corporate_name: 'Mundo Eletrônicos LTDA', brand_name: 'Mundo Eletronicos', 
-                              registration_number: '436000102', full_address: 'Av das cerejeiras, 41', 
-                              city: 'Salvador', state:'BA', email: 'eletronicos@gmail.com')
-      # Act
-      result = supplier.valid?
-      # Assert
-      expect(result).to eq false
-    end
   end
 end

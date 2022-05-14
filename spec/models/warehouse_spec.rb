@@ -113,14 +113,13 @@ RSpec.describe Warehouse, type: :model do
       expect(result).to eq false
   end
 
-
-    it 'false when zip code is invalid' do
+    it 'false when registration_number is invalid' do
       # Arrange
-      warehouse = Warehouse.new(name:'Rio', code: 'RIO', address: 'Endereço',
-                                cep: '2500', city: 'Rio', area: 1000, 
-                                description: 'Alguma descrição')
+      supplier = Supplier.new(corporate_name: 'Mundo Eletrônicos LTDA', brand_name: 'Mundo Eletronicos', 
+                            registration_number: '436000102', full_address: 'Av das cerejeiras, 41', 
+                            city: 'Salvador', state:'BA', email: 'eletronicos@gmail.com')
       # Act
-      result = warehouse.valid?
+      result = supplier.valid?
       # Assert
       expect(result).to eq false
     end
