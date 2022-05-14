@@ -1,6 +1,6 @@
 <section id = "suppliers">
 <h1>Fornecedores</h1>
-
+<% if @suppliers.any? %>
   <table>
     <thead>
       <tr>
@@ -19,11 +19,11 @@
     </tbody>
   </table>
   
-<% if @suppliers.empty? %>
+<% else %>
   <p>Não existem fornecedores cadastrados.</p>
 <% end %>
 
 <div>
-<%= link_to 'Cadastrar novo fornecedor' %>
+<%= link_to 'Cadastrar novo fornecedor', new_supplier_path %>
 </div>
 </section>

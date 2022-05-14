@@ -15,9 +15,9 @@ describe 'User sees suppliers' do
 
   it 'successfully' do
     # Arrange
-      Supplier.create!(corporate_name: 'World Technology Vision LTDA', brand_name: 'TECH VISION', registration_number: '43447216000102', 
+      Supplier.create!(corporate_name: 'World Technology Vision LTDA', brand_name: 'TECH VISION', registration_number: '3447216000102', 
                       full_address: 'Av das Flores, 500', city: 'Cajamar', state:'SP', email: 'tech_vision@gmail.com')
-      Supplier.create!(corporate_name: 'Mundo Eletrônicos LTDA', brand_name: 'Mundo Eletronicos', registration_number: '55447228000105', 
+      Supplier.create!(corporate_name: 'Mundo Eletrônicos LTDA', brand_name: 'Mundo Eletronicos', registration_number: '5447228000105', 
                       full_address: 'Av das cerejeiras, 41', city: 'Salvador', state:'BA', email: 'eletronicos@gmail.com')         
     # Act
     visit root_path

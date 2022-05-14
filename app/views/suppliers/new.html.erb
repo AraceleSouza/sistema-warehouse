@@ -1,0 +1,52 @@
+<h1>Fornecedores</h1>
+
+<% if (@supplier.errors.any?) %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @supplier.errors.full_messages.each do |msg| %>
+    <li><%= msg %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @supplier) do |supplier| %>
+  <div>
+    <%= supplier.label :corporate_name %>
+    <%= supplier.text_field :corporate_name %>
+  </div>
+
+  <div>
+    <%= supplier.label :brand_name %>
+    <%= supplier.text_field :brand_name %>
+  </div>
+
+  <div>
+    <%= supplier.label :full_address %>
+    <%= supplier.text_field :full_address %>
+  </div>
+
+  <div>
+    <%= supplier.label :registration_name %>
+    <%= supplier.number_field :registration_name %>
+  </div>
+
+  <div>
+    <%= supplier.label :city %>
+    <%= supplier.text_field :city %>
+  </div>
+
+  <div>
+    <%= supplier.label :state %>
+    <%= supplier.text_field :state %>
+  </div>
+
+  <div>
+    <%= supplier.label :email %>
+    <%= supplier.text_field :email %>
+  </div>
+
+  <div>
+     <%= link_to('Enviar', @supplier) %>
+  </div>
+  
+<% end %>
