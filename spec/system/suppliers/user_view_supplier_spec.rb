@@ -7,7 +7,7 @@ describe 'User sees suppliers' do
     # Act
     visit root_path
     within('nav') do
-      click_on 'Fornecedores'
+     click_on 'Fornecedores'
     end
     # Assert
     expect(current_path).to eq suppliers_path
