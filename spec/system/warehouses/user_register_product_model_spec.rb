@@ -6,6 +6,10 @@ describe 'User registers a product model' do
     supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG Eletronicos LTDA', 
                                 registration_number: '43447215000102', full_address: 'Av Doutor Arnaldo, 125',
                                 city: 'São Paulo', state: 'SP', email: 'sac@lgeletronicos.com')
+    other_supplier = Supplier.create!(brand_name: 'Samsung', corporate_name: 'LG Eletronicos LTDA', 
+                                registration_number: '43447302000103', full_address: 'Av das Flores 125',
+                                city: 'São Paulo', state: 'SP', email: 'contato@sansung.com')
+    
     # Act
     visit root_path
     click_on 'Modelos de Produtos'
@@ -28,6 +32,22 @@ describe 'User registers a product model' do
     expect(page).to have_content 'Dimensão: 45cm x 70cm x 10cm'
     expect(page).to have_content 'Peso: 8000g'
   end
+
+  it 'must fill in all fields' do
+    # Arrange
+    supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG Eletronicos LTDA', 
+                                  registration_number: '43447215000102', full_address: 'Av Doutor Arnaldo, 125',
+                                  city: 'São Paulo', state: 'SP', email: 'sac@lgeletronicos.com')
+    # Act
+    visit root_path
+    click_on 'Modelos de Produtos'
+    click_on 'Cadastrar Novo'
+    fill_in 'Nome', with: ' '
+    fill_in 'Altura', with: ' '
+    click_on 'Enviar'
+    # Assert
+    expect(page).to have_content 'Não foi possível cadastrar o modelo de produto.'
+  end 
 
  
 end
