@@ -14,10 +14,12 @@ describe 'User authenticates' do
     end
 
     # Assert
+    expect(page).to have_content 'Login efetuado com sucesso.'
     within('nav') do
       expect(page).not_to have_link 'Entrar'
       expect(page).to have_link 'Sair'
       expect(page).to have_content 'aracele@email.com'
     end
+    
   end
 end
