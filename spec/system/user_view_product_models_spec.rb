@@ -1,10 +1,23 @@
 require 'rails_helper'
 
 describe 'User sees product models' do
+  it 'if you are authenticated' do
+    # Arrange
+
+    # Act
+    visit root_path
+    within('nav') do
+      click_on 'Modelos de Produtos'
+    end  
+    # Assert
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'from the menu' do
     # Arrange
-    
+    user = User.create!(email: 'aracele@email.com', password: 'password')
     # Act 
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Modelos de Produtos'
@@ -15,6 +28,7 @@ describe 'User sees product models' do
 
   it 'successfully' do
     # Arrange
+    user = User.create!(email: 'aracele@email.com', password: 'password')
     supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG Eletronicos LTDA', 
                                 registration_number: '43447215000102', full_address: 'Av Doutor Arnaldo, 125',
                                 city: 'São Paulo', state: 'SP', email: 'sac@lgeletronicos.com')
@@ -24,6 +38,7 @@ describe 'User sees product models' do
                         depth: 20 , sku: 'SOU71-LG-NTIO9563625' , supplier: supplier)
     
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Modelos de Produtos'
@@ -39,8 +54,9 @@ describe 'User sees product models' do
 
   it 'and there are no registered products' do
     # Arrange
-
+    user = User.create!(email: 'aracele@email.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     # Assert

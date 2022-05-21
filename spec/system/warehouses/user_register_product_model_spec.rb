@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User registers a product model' do 
   it 'successfully' do
     # Arrange
+    user = User.create!(email: 'aracele@email.com', password: 'password')
     supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG Eletronicos LTDA', 
                                 registration_number: '43447215000102', full_address: 'Av Doutor Arnaldo, 125',
                                 city: 'São Paulo', state: 'SP', email: 'sac@lgeletronicos.com')
@@ -11,6 +12,7 @@ describe 'User registers a product model' do
                                 city: 'São Paulo', state: 'SP', email: 'contato@sansung.com')
     
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
@@ -35,10 +37,12 @@ describe 'User registers a product model' do
 
   it 'must fill in all fields' do
     # Arrange
+    user = User.create!(email: 'aracele@email.com', password: 'password')
     supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG Eletronicos LTDA', 
                                   registration_number: '43447215000102', full_address: 'Av Doutor Arnaldo, 125',
                                   city: 'São Paulo', state: 'SP', email: 'sac@lgeletronicos.com')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
