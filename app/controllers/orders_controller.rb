@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action: :authenticate_user!
-  
+  before_action :authenticate_user!
+
   def new
     @order = Order.new
     @warehouses = Warehouse.all

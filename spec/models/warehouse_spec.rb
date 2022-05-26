@@ -111,7 +111,7 @@ RSpec.describe Warehouse, type: :model do
       result = second_warehouse.valid?
       # Assert
       expect(result).to eq false
-  end
+    end
 
     it 'false when registration_number is invalid' do
       # Arrange
@@ -122,6 +122,17 @@ RSpec.describe Warehouse, type: :model do
       result = supplier.valid?
       # Assert
       expect(result).to eq false
+    end
+
+    describe '#full_description' do
+      it 'exige o nome e o código' do
+        # Arrange
+        w = Warehouse.new(name: 'Galpão Cuiabá', code: 'CBA')
+        # Act
+        result = w.full_description()
+        # Assert
+        expect(result).to eq ('CBA - Galpão Cuiabá')
+      end
     end
   end
 end
