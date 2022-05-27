@@ -27,7 +27,7 @@ describe 'Usuário cadastra um pedido' do
     supplier = Supplier.create!(corporate_name: 'World Technology Vision LTDA', brand_name: 'TECH VISION', 
                                 registration_number: '43447216000102', full_address: 'Av das Flores, 500', 
                                 city: 'Cajamar', state:'SP', email: 'tech_vision@gmail.com')
-        
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABC12345')    
     # Act
     login_as(user)
     visit root_path
@@ -38,6 +38,7 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Gravar'
     # Assert
     expect(page).to have_content 'Pedido registrado com sucesso.'
+    expect(page).to have_content 'Pedido ABC12345'
     expect(page).to have_content 'Galpão Destino: GRU - Aeroporto SP'
     expect(page).to have_content 'Fornecedor: World Technology Vision LTDA'
     expect(page).to have_content 'Usuário Responsável: Sergio - sergio@email.com'
