@@ -28,40 +28,40 @@ RSpec.describe Order, type: :model do
       # Assert
       expect(result).to be true
     end
-  end
+  
+    it 'estimated delivery date must not be old' do
+      # Arrange
+      order = Order.new(estimated_delivery_date: 1.day.ago)
+      # Act
+      order.valid?
+      result = order.errors.include? (:estimated_delivery_date)
+      # Assert
+      expect(result).to be true
+      expect(order.errors[:estimated_delivery_date]).to include("deve ser posterior.")
+    end
 
-  it 'estimated delivery date must not be old' do
-    # Arrange
-    order = Order.new(estimated_delivery_date: 1.day.ago)
-    # Act
-    order.valid?
-    result = order.errors.include? (:estimated_delivery_date)
-    # Assert
-    expect(result).to be true
-    expect(order.errors[:estimated_delivery_date]).to include("deve ser posterior.")
-  end
+    it 'estimated delivery date should not be the same as today' do
+      # Arrange
+      order = Order.new(estimated_delivery_date: Date.today)
+      # Act
+      order.valid?
+      result = order.errors.include? (:estimated_delivery_date)
+      # Assert
+      expect(result).to be true
+      expect(order.errors[:estimated_delivery_date]).to include("deve ser posterior.")
+    end
 
-  it 'estimated delivery date should not be the same as today' do
-    # Arrange
-    order = Order.new(estimated_delivery_date: Date.today)
-    # Act
-    order.valid?
-    result = order.errors.include? (:estimated_delivery_date)
-    # Assert
-    expect(result).to be true
-    expect(order.errors[:estimated_delivery_date]).to include("deve ser posterior.")
+    it 'estimated delivery date must be equal to or greater than tomorrow' do
+      # Arrange
+      order = Order.new(estimated_delivery_date: 1.day.from_now)
+      # Act
+      order.valid?
+      result = order.errors.include? (:estimated_delivery_date)
+      # Assert
+      expect(result).to be false
+    end
   end
-
-  it 'estimated delivery date must be equal to or greater than tomorrow' do
-    # Arrange
-    order = Order.new(estimated_delivery_date: 1.day.from_now)
-    # Act
-    order.valid?
-    result = order.errors.include? (:estimated_delivery_date)
-    # Assert
-    expect(result).to be false
-  end
-
+  
   describe 'generate a random code' do
     it 'when creating a new order' do
       # Arrange
