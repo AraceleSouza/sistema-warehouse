@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário cadastra um pedido' do
-  it 'e deve estar autenticado' do
+describe 'User registers an order' do
+  it 'and must be authenticated' do
     # Arrange
 
     # Act
@@ -11,7 +11,7 @@ describe 'Usuário cadastra um pedido' do
     expect(current_path).to eq new_user_session_path
   end
 
-  it 'com sucesso' do
+  it 'successfully' do
     # Arrange
     user = User.create!(name: 'Sergio', email: 'sergio@email.com', password:'123456')
     Warehouse.create(name: 'Galpão Maceio', code: 'MCZ', city: 'Maceio', area: 50_000, 
@@ -47,7 +47,7 @@ describe 'Usuário cadastra um pedido' do
     expect(page).not_to have_content 'Mundo Eletrônicos LTDA'
   end
 
-  it 'e não informa a data de entrega' do
+  it 'and does not inform the delivery date' do
     # Arrange
     user = User.create!(name: 'Sergio', email: 'sergio@email.com', password:'123456')
     warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
