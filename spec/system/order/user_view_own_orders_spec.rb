@@ -41,6 +41,7 @@ describe 'User sees their own orders' do
   it 'and visit an order' do
     # Arrange
     user = User.create!(name: 'Sergio', email: 'sergio@email.com', password:'123456')
+    carla = User.create!(name: 'Carla', email: 'carla@email.com', password:'123654')
     warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
                                         address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
                                         description: 'Galpão destinado para cargas internacionais')
@@ -62,5 +63,26 @@ describe 'User sees their own orders' do
     expect(page).to have_content 'Fornecedor: World Technology Vision LTDA'
     formatted_date = I18n.localize(1.day.from_now.to_date)
     expect(page).to have_content "Data Prevista de Entrega: #{formatted_date}"
+  end
+
+  it 'and does not visit requests from other users' do
+    user = User.create!(name: 'Sergio', email: 'sergio@email.com', password:'123456')
+    carla = User.create!(name: 'Carla', email: 'carla@email.com', password:'123654')
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                                        address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                                        description: 'Galpão destinado para cargas internacionais')
+    supplier = Supplier.create!(corporate_name: 'World Technology Vision LTDA', brand_name: 'TECH VISION', 
+                                        registration_number: '43447216000102', full_address: 'Av das Flores, 500', 
+                                        city: 'Cajamar', state:'SP', email: 'tech_vision@gmail.com') 
+
+    first_order = Order.create!(user: user , warehouse: warehouse, supplier:supplier, 
+                                        estimated_delivery_date: 1.day.from_now)
+    # Act
+    login_as(carla)
+    visit order_path(first_order.id)
+    # Assert
+    expect(current_path).not_to eq order_path(first_order.id)
+    expect(current_path).to eq root_path  
+    expect(page).to have_content 'Você não possui acesso a este pedido.' 
   end
 end
