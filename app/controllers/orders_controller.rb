@@ -39,6 +39,9 @@ class OrdersController < ApplicationController
   
   def edit
     @order = Order.find(params[:id])
+    if @order.user != current_user
+      redirect_to root_path
+    end
     @warehouses = Warehouse.all
     @suppliers = Supplier.all
   end
