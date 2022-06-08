@@ -23,19 +23,22 @@ describe 'User sees their own orders' do
                                         city: 'Cajamar', state:'SP', email: 'tech_vision@gmail.com') 
 
     first_order = Order.create!(user: user , warehouse: warehouse, supplier:supplier, 
-                                        estimated_delivery_date: 1.day.from_now)
+                                        estimated_delivery_date: 1.day.from_now, status: 'pending')
     second_order = Order.create!(user: carla, warehouse: warehouse, supplier:supplier, 
-                                        estimated_delivery_date: 1.day.from_now)
+                                        estimated_delivery_date: 1.day.from_now, status: 'delivered')
     third_order = Order.create!(user: user, warehouse: warehouse, supplier:supplier, 
-                                        estimated_delivery_date: 1.day.from_now)
+                                        estimated_delivery_date: 1.day.from_now, status: 'canceled')
     # Act
     login_as(user)
     visit root_path
     click_on 'Meus Pedidos'
     # Assert
     expect(page).to have_content first_order.code
+    expect(page).to have_content 'Pendente'
     expect(page).not_to have_content second_order.code
+    expect(page).not_to have_content 'Entregue'
     expect(page).to have_content third_order.code
+    expect(page).to have_content 'Cancelado'
   end
 
   it 'and visit an order' do

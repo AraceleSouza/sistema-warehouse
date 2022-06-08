@@ -43,6 +43,7 @@ describe 'User registers an order' do
     expect(page).to have_content 'Fornecedor: World Technology Vision LTDA'
     expect(page).to have_content 'Usuário Responsável: Sergio - sergio@email.com'
     expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'
+    expect(page).to have_content 'Situação do Pedido: Pendente'
     expect(page).not_to have_content 'Galpão Maceio'
     expect(page).not_to have_content 'Mundo Eletrônicos LTDA'
   end
