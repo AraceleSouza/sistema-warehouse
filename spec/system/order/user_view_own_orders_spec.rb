@@ -88,4 +88,36 @@ describe 'User sees their own orders' do
     expect(current_path).to eq root_path  
     expect(page).to have_content 'Você não possui acesso a este pedido.' 
   end
+
+  it 'and see order items' do
+    # Arrange
+    supplier = Supplier.create!(corporate_name: 'World Technology Vision LTDA', brand_name: 'TECH VISION', 
+                                        registration_number: '43447216000102', full_address: 'Av das Flores, 500', 
+                                        city: 'Cajamar', state:'SP', email: 'tech_vision@gmail.com') 
+    product_a = ProductModel.create!(name:'Produto A', weight: 15, width: 10, height: 20, depth: 30, 
+                                    supplier: supplier, sku: 'PROD-A-XPT0905697432')
+    product_b = ProductModel.create!(name:'Produto B', weight: 15, width: 10, height: 20, depth: 30, 
+                                    supplier: supplier, sku: 'PROD-B-XPT0905697433')
+    product_c = ProductModel.create!(name:'Produto C', weight: 15, width: 10, height: 20, depth: 30, 
+                                    supplier: supplier, sku: 'PROD-C-XPT0905697434')
+
+    user = User.create!(name: 'Carla', email: 'carla@email.com', password:'123654')
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                                        address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                                        description: 'Galpão destinado para cargas internacionais')
+    order = Order.create!(user: user , warehouse: warehouse, supplier:supplier, 
+                                        estimated_delivery_date: 1.day.from_now, status: 'pending')
+
+    OrderItem.create!(product_model: product_a, order: order, quantity: 19)
+    OrderItem.create!(product_model: product_b, order: order, quantity: 12)
+    # Act
+    login_as(user)
+    visit root_path
+    click_on 'Meus Pedidos'
+    click_on order.code
+    # Assert
+    expect(page).to have_content 'Itens do Pedido'
+    expect(page).to have_content '19 x Produto A'
+    expect(page).to have_content '12 x Produto B'
+  end
 end
