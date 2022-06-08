@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order_and_check_user, only: [:show, :edit, :update]
+  before_action :set_order_and_check_user, only: [:show, :edit, :update, :delivered]
 
   def index
     @orders = current_user.orders
@@ -43,6 +43,11 @@ class OrdersController < ApplicationController
     order_params = params.require(:order).permit(:warehouse_id, :supplier_id, :estimated_delivery_date)
     @order = Order.update(order_params)
     redirect_to @order, notice: 'Pedido atualizado com sucesso.'
+  end
+
+  def delivered
+    @order.delivered!
+    redirect_to @order
   end
 
   private

@@ -7,8 +7,6 @@
   <dd><%= order.supplier.corporate_name %></dd>
   <dt><%= Order.human_attribute_name(:user_id)%>:</dt>
   <dd><%= order.user.description %></dd>
-  <dt><%= Order.human_attribute_name(:estimated_delivery_date)%>:</dt>
-  <dd><%= t(order.estimated_delivery_date) %></dd>
   <dt><%= Order.human_attribute_name(:status)%>:</dt>
   <dd><%= t(order.status) %></dd>
 </dl>

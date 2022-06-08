@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   
   resources :orders, only: [:new, :create, :show, :index, :edit, :update] do 
     get 'search', on: :collection
+    post 'delivered', on: :member
   end
 end
