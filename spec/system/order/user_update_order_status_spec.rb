@@ -18,10 +18,12 @@ describe 'User informs new order status' do
     click_on 'Meus Pedidos'
     click_on order.code
     click_on 'Marcar como ENTREGUE'
-
     # Assert
     expect(current_path).to eq order_path(order.id)
     expect(page).to have_content('Situação do Pedido: Entregue')
+    expect(page).not_to have_button 'Marcar como CANCELADO'
+    expect(page).not_to have_button 'Marcar como ENTREGUE'
+
 
   end
 
