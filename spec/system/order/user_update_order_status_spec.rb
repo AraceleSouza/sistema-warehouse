@@ -10,8 +10,11 @@ describe 'User informs new order status' do
     supplier = Supplier.create!(corporate_name: 'World Technology Vision LTDA', brand_name: 'TECH VISION', 
                                 registration_number: '43447216000102', full_address: 'Av das Flores, 500', 
                                 city: 'Cajamar', state:'SP', email: 'tech_vision@gmail.com')
+    product = ProductModel.create!(supplier: supplier, name: 'Cadeira Gamer', weight: 5, 
+                                    height: 100, width: 70, depth: 75, sku: 'CAD-GAMER-PT05697423')
     order = Order.create!(user: carla , warehouse: warehouse, supplier:supplier, 
                                 estimated_delivery_date: 1.day.from_now, status: :pending)
+    OrderItem.create!(order: order, product_model: product, quantity: 5)
     # Act
     login_as(carla)
     visit root_path
@@ -23,6 +26,9 @@ describe 'User informs new order status' do
     expect(page).to have_content('Situação do Pedido: Entregue')
     expect(page).not_to have_button 'Marcar como CANCELADO'
     expect(page).not_to have_button 'Marcar como ENTREGUE'
+    expect(StockProduct.count).to eq 5
+    estoque = StockProduct.where(product_model: product, warehouse: warehouse).count
+    expect(estoque).to eq 5
   end
 
   it 'and order was canceled' do
