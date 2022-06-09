@@ -23,8 +23,6 @@ describe 'User informs new order status' do
     expect(page).to have_content('Situação do Pedido: Entregue')
     expect(page).not_to have_button 'Marcar como CANCELADO'
     expect(page).not_to have_button 'Marcar como ENTREGUE'
-
-
   end
 
   it 'and order was canceled' do
