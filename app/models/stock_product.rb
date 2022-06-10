@@ -3,7 +3,7 @@ class StockProduct < ApplicationRecord
   belongs_to :order
   belongs_to :product_model
 
-  before_validation :generate_serial_number
+  before_validation :generate_serial_number, on: :create
 
   private
 
