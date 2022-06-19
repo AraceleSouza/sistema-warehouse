@@ -19,13 +19,13 @@ describe 'Warehouse API' do
       expect(json_response.keys).not_to include("updated_at")
     end
 
-    it 'fail' do
+    it 'fail if warehouse not found' do
       # Arrange
-  
+
       # Act
-  
+      get "/api/v1/warehouses/999999"
       # Assert
-  
+      expect(response.status).to eq 404
     end
   end
 end
