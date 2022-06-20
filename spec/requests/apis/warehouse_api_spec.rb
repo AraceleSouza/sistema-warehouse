@@ -61,4 +61,28 @@ describe 'Warehouse API' do
       expect(json_response).to eq []
     end
   end
+
+  context 'POST /api/v1/warehouses' do
+    it 'success' do
+      # Arrange
+      warehouse_params  = { warehouse: { name: 'Aeroporto Internacional', code: 'GRU',
+                            city: 'Guarulhos', area: 100_000,
+                            address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                            description: 'Galpão destinado para cargas internacionais'}
+                           }
+      # Act
+      post "/api/v1/warehouses", params: warehouse_params
+      # Assert
+      expect(response).to have_http_status(201)
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response["name"]).to eq('Aeroporto Internacional')
+      expect(json_response["code"]).to eq('GRU')
+      expect(json_response["city"]).to eq('Guarulhos')
+      expect(json_response["area"]).to eq(100_000)
+      expect(json_response["address"]).to eq('Avenida do Aeroporto, 1000')
+      expect(json_response["cep"]).to eq('15000-000')
+      expect(json_response["description"]).to eq('Galpão destinado para cargas internacionais')
+    end
+  end
 end
