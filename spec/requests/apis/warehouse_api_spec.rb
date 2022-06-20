@@ -84,5 +84,21 @@ describe 'Warehouse API' do
       expect(json_response["cep"]).to eq('15000-000')
       expect(json_response["description"]).to eq('Galpão destinado para cargas internacionais')
     end
+
+    it 'fail if parameters are not complete' do
+      # Arrange
+      warehouse_params  = { warehouse: { name: 'Aeroporto Curitiba', code: 'CWB'}}
+      # Act
+      post "/api/v1/warehouses", params: warehouse_params
+      # Assert
+      expect(response).to have_http_status(412)
+      expect(response.body).not_to include "Nome não pode ficar em branco"
+      expect(response.body).not_to include "Código não pode ficar em branco"
+      expect(response.body).to include "Cidade não pode ficar em branco"
+      expect(response.body).to include "Área não pode ficar em branco"      
+      expect(response.body).to include "CEP não pode ficar em branco"
+      expect(response.body).to include "Endereço não pode ficar em branco"  
+      expect(response.body).to include "Descrição não pode ficar em branco"
+    end
   end
 end
