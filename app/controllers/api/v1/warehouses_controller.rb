@@ -14,13 +14,17 @@ class Api::V1::WarehousesController < ActionController::API
   end
 
   def create
-    warehouse_params = params.require(:warehouse).permit( :name, :code, :city, :address, 
-                                                          :area, :cep, :description)
-    warehouse = Warehouse.new(warehouse_params)
-    if warehouse.save
-      render status: 201, json: warehouse
-    else
-      render status: 412, json: {errors: warehouse.errors.full_messages }
-    end
+    begin
+      warehouse_params = params.require(:warehouse).permit( :name, :code, :city, :address, 
+                                                            :area, :cep, :description)
+      warehouse = Warehouse.new(warehouse_params)
+      if warehouse.save
+        render status: 201, json: warehouse
+      else
+        render status: 412, json: {errors: warehouse.errors.full_messages }
+      end
+    rescue
+      render status: 500
+    end      
   end
 end

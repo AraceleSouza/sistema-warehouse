@@ -100,5 +100,19 @@ describe 'Warehouse API' do
       expect(response.body).to include "Endereço não pode ficar em branco"  
       expect(response.body).to include "Descrição não pode ficar em branco"
     end
+
+    it 'fail if theres an internal error' do
+      # Arrange
+      allow(Warehouse).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
+      warehouse_params  = { warehouse: { name: 'Aeroporto Internacional', code: 'GRU',
+                            city: 'Guarulhos', area: 100_000,
+                            address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                            description: 'Galpão destinado para cargas internacionais'}
+                           }
+      # Act
+      post "/api/v1/warehouses", params: warehouse_params
+      # Assert
+      expect(response).to have_http_status(500)
+    end
   end
 end
