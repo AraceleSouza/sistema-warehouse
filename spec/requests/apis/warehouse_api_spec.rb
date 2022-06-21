@@ -60,6 +60,15 @@ describe 'Warehouse API' do
       json_response = JSON.parse(response.body)
       expect(json_response).to eq []
     end
+
+    it 'and raise internal error' do
+      # Arrange
+      allow(Warehouse).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
+      # Act
+      get "/api/v1/warehouses"
+      # Assert
+      expect(response).to have_http_status(500)
+    end
   end
 
   context 'POST /api/v1/warehouses' do
