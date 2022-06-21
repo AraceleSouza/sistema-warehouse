@@ -1,6 +1,4 @@
-class Api::V1::WarehousesController < ActionController::API
-  rescue_from ActiveRecord::ActiveRecordError, with: :return_500
-  rescue_from ActiveRecord::RecordNotFound, with: :return_404
+class Api::V1::WarehousesController < Api::V1::ApiController
   def show
     warehouse = Warehouse.find(params[:id])
     render status: 200, json: warehouse.as_json(except: [:created_at, :updated_at] )
@@ -20,15 +18,5 @@ class Api::V1::WarehousesController < ActionController::API
     else
       render status: 412, json: {errors: warehouse.errors.full_messages }
     end
-  end
-
-  private
-
-  def return_500
-    render status: 500
-  end
-
-  def return_404
-    render status: 404
   end
 end
