@@ -6,3 +6,4 @@ pt-BR:
       order_item:
         quantity: "Quantidade"
         product_model_id: "Produto"
+        order_id: "Pedido"

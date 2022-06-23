@@ -4,8 +4,8 @@
   <table>
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Localização</th>
+        <th><%= Supplier.model_name.human %></th>
+        <th>Localização</th> 
       </tr>
     </thead>
     
@@ -23,9 +23,7 @@
   <p>Não existem fornecedores cadastrados.</p>
 <% end %>
 
-
 <div>
 <%= link_to 'Cadastrar novo fornecedor', new_supplier_path %>
 </div>
-
 </section>

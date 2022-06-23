@@ -1,14 +1,14 @@
-<h1> Fornecedor <%= @supplier.brand_name %> </h1>
+<h1> <%= Supplier.model_name.human %> <%= @supplier.brand_name %> </h1>
 <h2> <%= @supplier.corporate_name %> </h2>
 
 <dl>
-  <dt>CNPJ:</dt>
-  <dd> <%= @supplier.registration_number%> </dd>
+  <dt><%= Supplier.human_attribute_name(:registration_number)%>:</dt>
+  <dd><%= @supplier.registration_number%> </dd>
 
-  <dt>Endereço:</dt>
+  <dt><%= Supplier.human_attribute_name(:full_address)%>:</dt>
   <dd> <%= @supplier.full_address %> - <%= @supplier.city %> - <%= @supplier.state %> </dd>
 
-  <dt>E-mail:</dt>
+  <dt><%= Supplier.human_attribute_name(:email)%>:</dt>
   <dd> <%= @supplier.email %> </dd>
 </dl>
 

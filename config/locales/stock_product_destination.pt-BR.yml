@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      stock_product_destination: 'Saída de Estoque'
+    attributes:
+      stock_product_destination:
+        product_model_id: 'Item para saída'
+        recipient: 'Destinatário'
+        address: 'Endereço Destino'
+        

@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      stock_product: 'Itens em Estoque'
+    attributes:
+      stock_product:
+        warehouse_id: 'Galpão'
+        warehouse: 'Galpão'
+        order_id: 'Pedido'
+        order: 'Pedido'
+        product_model_id: 'Modelo de Produto'
+        product_model: 'Modelo de Produto'
+        serial_number: 'Número de série'

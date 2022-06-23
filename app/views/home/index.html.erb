@@ -1,4 +1,3 @@
-
 <section id = "warehouses">
 <h2>Galpões</h2>
 
@@ -9,11 +8,11 @@
   <div>
     <h3><%= link_to(warehouse.name, warehouse_path(warehouse.id)) %></h3>
     <dl>
-      <dt>Código:</dt>
+      <dt><%= Warehouse.human_attribute_name(:code)%>:</dt>
       <dd><%= warehouse.code %></dd>
-      <dt>Cidade:</dt>
+      <dt><%= Warehouse.human_attribute_name(:city)%>:</dt>
       <dd><%= warehouse.city %></dd>
-      <dt>Área</dt>
+      <dt><%= Warehouse.human_attribute_name(:area)%>:</dt>
       <dd><%= warehouse.area %> m2</dd>
     </dl>
   <div>
